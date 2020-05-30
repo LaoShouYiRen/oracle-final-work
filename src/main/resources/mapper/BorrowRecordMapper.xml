@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zio.oraclefinalwork.mapper.BorrowRecordMapper">
+  <resultMap id="BaseResultMap" type="com.zio.oraclefinalwork.domain.BorrowRecord">
+    <result column="BOOK_ID" jdbcType="VARCHAR" property="bookId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="BORROW_DATE" jdbcType="TIMESTAMP" property="borrowDate" />
+    <result column="RETURN_DATE" jdbcType="TIMESTAMP" property="returnDate" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zio.oraclefinalwork.domain.BorrowRecord">
+    insert into BORROW_RECORD (BOOK_ID, USER_ID, BORROW_DATE, 
+      RETURN_DATE)
+    values (#{bookId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{borrowDate,jdbcType=TIMESTAMP}, 
+      #{returnDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zio.oraclefinalwork.domain.BorrowRecord">
+    insert into BORROW_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        BOOK_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="borrowDate != null">
+        BORROW_DATE,
+      </if>
+      <if test="returnDate != null">
+        RETURN_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowDate != null">
+        #{borrowDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="returnDate != null">
+        #{returnDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

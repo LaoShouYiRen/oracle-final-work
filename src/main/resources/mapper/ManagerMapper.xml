@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zio.oraclefinalwork.mapper.ManagerMapper">
+  <resultMap id="BaseResultMap" type="com.zio.oraclefinalwork.domain.Manager">
+    <id column="MANAGER_ID" jdbcType="DECIMAL" property="managerId" />
+    <result column="MANAGER_NAME" jdbcType="VARCHAR" property="managerName" />
+    <result column="MANAGER_PWD" jdbcType="VARCHAR" property="managerPwd" />
+    <result column="MANAGER_PHONE" jdbcType="VARCHAR" property="managerPhone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MANAGER_ID, MANAGER_NAME, MANAGER_PWD, MANAGER_PHONE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from MANAGER
+    where MANAGER_ID = #{managerId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from MANAGER
+    where MANAGER_ID = #{managerId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.zio.oraclefinalwork.domain.Manager">
+    insert into MANAGER (MANAGER_ID, MANAGER_NAME, MANAGER_PWD, 
+      MANAGER_PHONE)
+    values (#{managerId,jdbcType=DECIMAL}, #{managerName,jdbcType=VARCHAR}, #{managerPwd,jdbcType=VARCHAR}, 
+      #{managerPhone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zio.oraclefinalwork.domain.Manager">
+    insert into MANAGER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="managerId != null">
+        MANAGER_ID,
+      </if>
+      <if test="managerName != null">
+        MANAGER_NAME,
+      </if>
+      <if test="managerPwd != null">
+        MANAGER_PWD,
+      </if>
+      <if test="managerPhone != null">
+        MANAGER_PHONE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="managerId != null">
+        #{managerId,jdbcType=DECIMAL},
+      </if>
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPwd != null">
+        #{managerPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPhone != null">
+        #{managerPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zio.oraclefinalwork.domain.Manager">
+    update MANAGER
+    <set>
+      <if test="managerName != null">
+        MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPwd != null">
+        MANAGER_PWD = #{managerPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPhone != null">
+        MANAGER_PHONE = #{managerPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MANAGER_ID = #{managerId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zio.oraclefinalwork.domain.Manager">
+    update MANAGER
+    set MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
+      MANAGER_PWD = #{managerPwd,jdbcType=VARCHAR},
+      MANAGER_PHONE = #{managerPhone,jdbcType=VARCHAR}
+    where MANAGER_ID = #{managerId,jdbcType=DECIMAL}
+  </update>
+</mapper>

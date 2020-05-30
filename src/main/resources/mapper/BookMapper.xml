@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zio.oraclefinalwork.mapper.BookMapper">
+  <resultMap id="BaseResultMap" type="com.zio.oraclefinalwork.domain.Book">
+    <result column="BOOK_ID" jdbcType="VARCHAR" property="bookId" />
+    <result column="BOOK_NAME" jdbcType="VARCHAR" property="bookName" />
+    <result column="BOOK_AUTHOR" jdbcType="VARCHAR" property="bookAuthor" />
+    <result column="BOOK_CATEGORY" jdbcType="VARCHAR" property="bookCategory" />
+    <result column="BOOK_CONDITION" jdbcType="VARCHAR" property="bookCondition" />
+  </resultMap>
+  <insert id="insert" parameterType="com.zio.oraclefinalwork.domain.Book">
+    insert into BOOK (BOOK_ID, BOOK_NAME, BOOK_AUTHOR, 
+      BOOK_CATEGORY, BOOK_CONDITION)
+    values (#{bookId,jdbcType=VARCHAR}, #{bookName,jdbcType=VARCHAR}, #{bookAuthor,jdbcType=VARCHAR}, 
+      #{bookCategory,jdbcType=VARCHAR}, #{bookCondition,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zio.oraclefinalwork.domain.Book">
+    insert into BOOK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        BOOK_ID,
+      </if>
+      <if test="bookName != null">
+        BOOK_NAME,
+      </if>
+      <if test="bookAuthor != null">
+        BOOK_AUTHOR,
+      </if>
+      <if test="bookCategory != null">
+        BOOK_CATEGORY,
+      </if>
+      <if test="bookCondition != null">
+        BOOK_CONDITION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bookId != null">
+        #{bookId,jdbcType=VARCHAR},
+      </if>
+      <if test="bookName != null">
+        #{bookName,jdbcType=VARCHAR},
+      </if>
+      <if test="bookAuthor != null">
+        #{bookAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCategory != null">
+        #{bookCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="bookCondition != null">
+        #{bookCondition,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
